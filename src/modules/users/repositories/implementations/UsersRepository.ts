@@ -24,7 +24,7 @@ class UsersRepository implements IUsersRepository {
     Object.assign(user, {
       name,
       email,
-      admin: true,
+      admin: false,
       created_at: new Date(),
       updated_at: new Date(),
     });
@@ -42,12 +42,12 @@ class UsersRepository implements IUsersRepository {
     return this.users.find((user) => user.email === email);
   }
 
-  turnAdmin(receivedUser: User): User | null {
-    // !Change final return removing null
-    const getUser = this.users.find((user) => user === receivedUser);
-    console.log(getUser);
+  turnAdmin(receivedUser: User): User {
+    const user = this.users.find((user) => user === receivedUser);
 
-    return null;
+    user.admin = true;
+
+    return user;
   }
 
   list(): User[] {
